@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        var lili = {
+            "name": "#Lili'sTeam",
+            "occupation": "manipulation",
+            "debt": false,
+            "weapon": "loveliness",
+            "id": 2606
+        };
+        const url = "https://ih-crud-api.herokuapp.com/characters/"
+
+        fetch(url, {
+            //method: 'POST',
+            method: 'DELETE', //para delete no se ocupa el body
+            headers: {
+                "Content-Type": "application/json"
+            },
+            //body: JSON.stringify(lili)
+        })
+        .then(res => {
+            if(!res.ok) return Promise.reject(res.statusText);
+            return res.json()
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => console.log(err))
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+</body>
+</html>

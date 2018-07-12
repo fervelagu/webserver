@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        //const url = "https://pokeapi.co/api/v2/pokemon/1/"
+        const url = "https://api.iextrading.com/1.0/stock/amzn/chart/"
+
+        fetch(url)
+        .then(res => {
+            if(!res.ok) return Promise.reject(res.statusText);
+            return res.json()
+        })
+        .then(data => {
+            printTheChart(data);
+        }).catch(err => console.log(err));
+
+        let printTheChart = ((stockData) => {
+        let stockLabels = stockData.map( element => element.date);
+        let stockPrice = stockData.map( element => element.close);
+        let ctx = document.getElementById('myChart').getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+            labels: stockLabels,
+            datasets: [{
+                label: "Stock Chart",
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: stockPrice,
+            }]
+            }
+        });
+        });
+        // .then(pikachu => {
+        //     alert(pikachu.name);
+        // }).catch(err => console.log(err));
+        // const planets = "https://swapi.co/api/planets"
+        // const people = "https://swapi.co/api/people"
+        // const starships = "https://swapi.co/api/starships"
+        
+        // promises = [fetch(planets), fetch(people), fetch(starships)];
+
+        // Promise.all(promises)
+        // .then(results => {
+        //     console.log(results[0])
+        //     console.log(results[1])
+        //     console.log(results[2])
+        // })
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+</body>
+</html>
